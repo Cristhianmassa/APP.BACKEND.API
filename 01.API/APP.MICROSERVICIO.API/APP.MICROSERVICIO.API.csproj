@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0-preview.1.22076.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\AutoresMicroServicio\Data\" />
+    <Folder Include="Areas\AutoresMicroServicio\Models\" />
+    <Folder Include="Areas\AutoresMicroServicio\Views\" />
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\02.NEGOCIO\APP.Autores.Negocio\APP.Autores.Negocio.csproj" />
+    <ProjectReference Include="..\..\03.DATOS\APP.AutoresEF.Datos\APP.AutoresEF.Datos.csproj" />
+    <ProjectReference Include="..\..\04.ENTIDADES\APP.Autores.Entidades\APP.Autores.Entidades.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -20,7 +20,7 @@ namespace APP.MICROSERVICIO.API.Areas.AutoresMicroServicio.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Libro>> Get(int id)
         {
-            return await context.Libros.FirstOrDefaultAsync(x => x.Id == id);
+            return await context.Libros.Include(x => x.Autor).FirstOrDefaultAsync(x => x.Id == id);
         }
 
         [HttpPost]

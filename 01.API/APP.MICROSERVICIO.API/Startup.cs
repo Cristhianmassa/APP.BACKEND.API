@@ -1,6 +1,9 @@
-﻿using APP.Autores.Negocio.AutoresMicroServicio;
+﻿
+using APP.Autores.Negocio.AutoresMicroServicio;
+using APP.Autores.Negocio.Interfaces;
 using APP.AutoresEF.Datos;
 using APP.AutoresEF.Datos.AutoresMicroServicio;
+using APP.AutoresEF.Datos.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,7 +32,7 @@ namespace APP.MICROSERVICIO.API
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
 
-            services.AddTransient<IAutoresMicroServicioNegocio, AutoresNegocio>();
+            services.AddTransient<IAutoresMicroServicio, AutoresNegocio>();
             services.AddTransient<IAutoresMicroServicioDatos, AutoresDatos>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

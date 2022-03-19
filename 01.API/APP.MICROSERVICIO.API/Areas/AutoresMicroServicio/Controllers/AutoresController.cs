@@ -1,8 +1,9 @@
 ﻿using APP.Autores.Entidades;
+using APP.Autores.Negocio.Interfaces;
 using APP.AutoresEF.Datos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using APP.Autores.Negocio.AutoresMicroServicio;
+
 
 namespace APP.MICROSERVICIO.API.Areas.AutoresMicroServicio.Controllers
 {
@@ -10,11 +11,10 @@ namespace APP.MICROSERVICIO.API.Areas.AutoresMicroServicio.Controllers
     [Route("api/autoresmicroservicio/autores")] //Otros: [Route("api/autoresmicroservicio/[controller]")]
     public class AutoresController : ControllerBase
     {       
-        private readonly IAutoresMicroServicioNegocio autoresNegocio;             
+        private readonly IAutoresMicroServicio autoresNegocio;             
 
-        public AutoresController(IAutoresMicroServicioNegocio autoresNegocio)
-        {
-           
+        public AutoresController(IAutoresMicroServicio autoresNegocio)
+        {           
             this.autoresNegocio = autoresNegocio;           
         }
 

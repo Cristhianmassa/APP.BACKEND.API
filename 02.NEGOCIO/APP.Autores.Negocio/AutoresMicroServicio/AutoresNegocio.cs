@@ -1,6 +1,7 @@
 ﻿using APP.Autores.Entidades;
+using APP.Autores.Negocio.Interfaces;
 using APP.AutoresEF.Datos;
-using APP.AutoresEF.Datos.AutoresMicroServicio;
+using APP.AutoresEF.Datos.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,24 +11,9 @@ using System.Threading.Tasks;
 
 namespace APP.Autores.Negocio.AutoresMicroServicio
 {
-    public interface IAutoresMicroServicioNegocio
-    {
-        
-        Task<List<Autor>> ObtenerTodos();
-        Task<List<Autor>> ObtenerConLibros();
-        Task<Autor> PrimerAutor();
+  
 
-        Task<Autor> Get(int id);
-        Task<Autor> Get(string nombre);
-
-        Task<bool> Post(Autor autor);
-        Task<bool> Put(Autor autor, int id);
-        Task<bool> ExisteAutor(int id);
-        Task<bool> Delete(int id);
-        Task<bool> ExisteAutorMismoNombre(string nombre);
-    }
-
-    public class AutoresNegocio : IAutoresMicroServicioNegocio
+    public class AutoresNegocio : IAutoresMicroServicio
     {
         private readonly IAutoresMicroServicioDatos autoresDatos;
 

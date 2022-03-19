@@ -24,6 +24,7 @@ namespace APP.Autores.Negocio.AutoresMicroServicio
         Task<bool> Put(Autor autor, int id);
         Task<bool> ExisteAutor(int id);
         Task<bool> Delete(int id);
+        Task<bool> ExisteAutorMismoNombre(string nombre);
     }
 
     public class AutoresNegocio : IAutoresMicroServicioNegocio
@@ -81,6 +82,11 @@ namespace APP.Autores.Negocio.AutoresMicroServicio
         public async Task<bool> Delete(int id)
         {
             return await autoresDatos.Delete(id);
+        }
+
+        public async Task<bool> ExisteAutorMismoNombre(string nombre)
+        {
+            return await autoresDatos.ExisteAutorMismoNombre(nombre);
         }
     }
 }

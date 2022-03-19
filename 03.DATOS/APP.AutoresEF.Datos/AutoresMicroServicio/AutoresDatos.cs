@@ -19,6 +19,7 @@ namespace APP.AutoresEF.Datos.AutoresMicroServicio
         Task<bool> Put(Autor autor, int id);
         Task<bool> ExisteAutor(int id);
         Task<bool> Delete(int id);
+        Task<bool> ExisteAutorMismoNombre(string nombre);
     }
 
     public class AutoresDatos : IAutoresMicroServicioDatos
@@ -85,6 +86,11 @@ namespace APP.AutoresEF.Datos.AutoresMicroServicio
             context.Remove(new Autor() { Id = id });
             await context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<bool> ExisteAutorMismoNombre(string nombre)
+        {
+            return await context.Autores.AnyAsync(x=>x.Nombre == nombre);
         }
     }
 }

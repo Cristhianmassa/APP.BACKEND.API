@@ -6,7 +6,7 @@ using APP.Autores.Negocio.AutoresMicroServicio;
 
 namespace APP.MICROSERVICIO.API.Areas.AutoresMicroServicio.Controllers
 {
-    [ApiController]
+    [ApiController] 
     [Route("api/autoresmicroservicio/autores")] //Otros: [Route("api/autoresmicroservicio/[controller]")]
     public class AutoresController : ControllerBase
     {       
@@ -35,12 +35,14 @@ namespace APP.MICROSERVICIO.API.Areas.AutoresMicroServicio.Controllers
             return await autoresNegocio.ObtenerTodos();
         }
 
-        [HttpGet("PrimerAutor")] 
-        public async Task<ActionResult<Autor>> PrimerAutor()
+        [HttpGet("PrimerAutor")]
+        //public async Task<ActionResult<Autor>> PrimerAutor()
+        public async Task<ActionResult<Autor>> PrimerAutor([FromHeader] int miValor, [FromQuery] string nombre)
         {
             return await autoresNegocio.PrimerAutor();
-           
+
         }
+              
 
         [HttpGet("primero2")] //Aqui no es necesario asincrona porque no comunico con BD, ni con apis de terceros, operac I/O
         public ActionResult<Autor> PrimerAutor2()
@@ -78,7 +80,7 @@ namespace APP.MICROSERVICIO.API.Areas.AutoresMicroServicio.Controllers
         }
 
         [HttpGet("{nombre}")] //Ruta sin restriccion
-        public async Task<ActionResult<Autor>> Get(string nombre)
+        public async Task<ActionResult<Autor>> Get([FromRoute] string nombre)
         {
             var autor = await autoresNegocio.Get(nombre);
             if (autor == null)
@@ -88,9 +90,19 @@ namespace APP.MICROSERVICIO.API.Areas.AutoresMicroServicio.Controllers
             return autor;
         }
 
+        //ModelBinders
+        //[FromServices] Desde servicios 
+        //[FromForm] para archivos word, imagenes, pdf, etc. desde nuestros clientes.
         [HttpPost]
-        public async Task<ActionResult> Post(Autor autor)
+        public async Task<ActionResult> Post([FromBody] Autor autor)
         {
+            //Validacion a nivel del controller util al examinar bd es mas sencillo desde aqui
+            bool existeAutorConElMismoNombre = await autoresNegocio.ExisteAutorMismoNombre(autor.Nombre);
+            if (existeAutorConElMismoNombre)
+            {
+                return BadRequest($"Ya existe un autor con el nombre {autor.Nombre}. "); 
+            }
+
             var result = await autoresNegocio.Post(autor);            
             return Ok();
         }
